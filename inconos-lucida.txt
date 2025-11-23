@@ -1,0 +1,130 @@
+
+Para ver la lista completa de iconos de Lucide, tienes varias opciones:
+
+1. Explorador web de iconos (Recomendado):
+
+Visita estos sitios donde puedes buscar y copiar los nombres:
+
+Icônes: https://icones.js.org/collection/lucide
+Lucide oficial: https://lucide.dev/icons/
+2. Iconos más comunes de Lucide:
+
+Aquí te dejo una lista de los más usados organizados por categoría:
+
+Navegación y Direcciones:
+
+i-lucide-home - Casa/Inicio
+i-lucide-menu - Menú hamburguesa
+i-lucide-x - Cerrar/X
+i-lucide-arrow-left / i-lucide-arrow-right - Flechas
+i-lucide-arrow-up / i-lucide-arrow-down - Flechas verticales
+i-lucide-chevron-left / i-lucide-chevron-right - Chevrones
+i-lucide-chevron-up / i-lucide-chevron-down - Chevrones verticales
+Acciones Comunes:
+
+i-lucide-plus - Más/Agregar
+i-lucide-minus - Menos/Restar
+i-lucide-trash / i-lucide-trash-2 - Eliminar
+i-lucide-edit / i-lucide-pencil - Editar
+i-lucide-save - Guardar
+i-lucide-download - Descargar
+i-lucide-upload - Subir
+i-lucide-copy - Copiar
+i-lucide-check - Check/Verificar
+i-lucide-x-circle - Error/Cancelar
+Usuario y Cuenta:
+
+i-lucide-user - Usuario
+i-lucide-users - Usuarios múltiples
+i-lucide-user-plus - Agregar usuario
+i-lucide-user-check - Usuario verificado
+i-lucide-log-in / i-lucide-log-out - Login/Logout
+Configuración:
+
+i-lucide-settings - Configuración
+i-lucide-sliders - Ajustes/Sliders
+i-lucide-filter - Filtro
+i-lucide-search - Buscar
+Archivos y Documentos:
+
+i-lucide-file - Archivo
+i-lucide-file-text - Documento de texto
+i-lucide-folder - Carpeta
+i-lucide-folder-open - Carpeta abierta
+Comunicación:
+
+i-lucide-mail - Email
+i-lucide-message-circle - Mensaje/Chat
+i-lucide-phone - Teléfono
+i-lucide-bell - Notificación
+i-lucide-send - Enviar
+Medios:
+
+i-lucide-image - Imagen
+i-lucide-video - Video
+i-lucide-music - Música
+i-lucide-camera - Cámara
+i-lucide-play / i-lucide-pause - Reproducir/Pausar
+Interfaz:
+
+i-lucide-sun / i-lucide-moon - Modo claro/oscuro
+i-lucide-star - Estrella/Favorito
+i-lucide-heart - Corazón/Me gusta
+i-lucide-eye / i-lucide-eye-off - Visible/Oculto
+i-lucide-lock / i-lucide-unlock - Bloqueado/Desbloqueado
+i-lucide-loader - Cargando
+i-lucide-refresh-cw - Refrescar
+Estado y Alertas:
+
+i-lucide-alert-circle - Alerta
+i-lucide-alert-triangle - Advertencia
+i-lucide-info - Información
+i-lucide-help-circle - Ayuda
+i-lucide-check-circle - Éxito
+Comercio:
+
+i-lucide-shopping-cart - Carrito de compras
+i-lucide-shopping-bag - Bolsa de compras
+i-lucide-credit-card - Tarjeta de crédito
+i-lucide-dollar-sign - Dinero
+Desarrollo:
+
+i-lucide-code - Código
+i-lucide-terminal - Terminal
+i-lucide-database - Base de datos
+i-lucide-git-branch - Git branch
+i-lucide-package - Paquete
+
+Ejemplo de uso : <template>
+  <div class="flex gap-4">
+    <UIcon name="i-lucide-home" class="size-6" />
+    <UIcon name="i-lucide-user" class="size-6" />
+    <UIcon name="i-lucide-settings" class="size-6" />
+    <UIcon name="i-lucide-heart" class="size-6" />
+    <UIcon name="i-lucide-star" class="size-6" />
+  </div>
+</template>
+ 
+
+ // tailwind.config.js (Debe contener tus colores personalizados)
+import { createPreset } from '@nuxt/ui/tailwind' 
+import type { Config } from 'tailwindcss'
+
+export default <Partial<Config>>{
+  presets: [createPreset()],
+  theme: {
+    extend: {
+      colors: {
+        // Deben coincidir con los nombres en nuxt.config.ts
+        sakura: '#f9a8d4',     
+        lilac: '#c4b5fd',      
+        sky: '#93c5fd',        
+        honey: '#fcd34d',      
+        mint: '#86efac',       
+        pearl: '#e5e7eb',      
+        rose: '#fb7185',
+        purple: '#a78bfa'
+      }
+    }
+  }
+}

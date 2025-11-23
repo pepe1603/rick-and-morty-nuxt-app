@@ -1,0 +1,23 @@
+{
+  "name": "mi-primer-nuxt",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@iconify-json/lucide": "^1.2.73",
+    "@nuxt/ui": "^4.2.0",
+    "@nuxtjs/icon": "^3.0.0-beta.16",
+    "@pinia/nuxt": "^0.11.3",
+    "lucide-vue-next": "^0.554.0",
+    "nuxt": "^4.2.1",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.24",
+    "vue-router": "^4.6.3"
+  }
+}
