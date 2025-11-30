@@ -1,4 +1,3 @@
-<!-- pages/index.vue -->
 <script setup lang="ts">
 const { getColorVariant } = useCustomColorVariants()
 
@@ -17,6 +16,7 @@ const { getColorVariant } = useCustomColorVariants()
     </p>
 
     <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+      
       <UButton
         to="/characters"
         size="xl"
@@ -26,6 +26,7 @@ const { getColorVariant } = useCustomColorVariants()
       >
         Ver Personajes
       </UButton>
+      
       <UButton
         to="/episodes"
         size="xl"
@@ -35,6 +36,17 @@ const { getColorVariant } = useCustomColorVariants()
       >
         Ver Episodios
       </UButton>
+      
+      <UButton
+        to="/locations"
+        size="xl"
+        :ui="getColorVariant('terra', 'outline')"
+        variant="outline"
+        icon="i-lucide-globe"
+      >
+        Ver Ubicaciones
+      </UButton>
+      
     </div>
 
     <div class="mt-20 pt-10 border-t border-gray-200 dark:border-gray-800">

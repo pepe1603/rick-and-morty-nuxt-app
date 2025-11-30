@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Character } from "~/store/types";
+import type { Character } from "~/types/";
 
 const { getColorVariant } = useCustomColorVariants();
 

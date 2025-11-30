@@ -1,16 +1,17 @@
-// store/characters.ts
+// app/store/episodes.ts
 import { defineStore } from 'pinia';
-import type { Character, Info } from '~/types';
+// Importamos los tipos desde la nueva ubicación '~/types'
+import type { Episode, Info } from '~/types'; 
 
-interface CharactersState {
-  characters: Character[];
+interface EpisodesState {
+  episodes: Episode[];
   info: Info | null;
   currentPage: number;
 }
 
-export const useCharacterStore = defineStore('characters', {
-  state: (): CharactersState => ({
-    characters: [],
+export const useEpisodeStore = defineStore('episodes', {
+  state: (): EpisodesState => ({
+    episodes: [],
     info: null,
     currentPage: 1
   }),
@@ -21,8 +22,8 @@ export const useCharacterStore = defineStore('characters', {
   },
 
   actions: {
-    setCharacters(list: Character[]) {
-      this.characters = list;
+    setEpisodes(list: Episode[]) {
+      this.episodes = list;
     },
     setInfo(info: Info) {
       this.info = info;
@@ -32,7 +33,7 @@ export const useCharacterStore = defineStore('characters', {
       this.currentPage = Math.max(1, page); 
     },
     clear() {
-      this.characters = [];
+      this.episodes = [];
       this.info = null;
     },
   }

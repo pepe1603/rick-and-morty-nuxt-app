@@ -39,9 +39,11 @@ const isDark = computed({
   <div>
     <UHeader :links="links" class="bg-forest-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
       <template #left>
-        <span class="text-2xl font-bold text-forest-700 dark:text-forest-300">
+        <ULink to="/">
+          <span class="text-2xl font-bold text-forest-700 dark:text-forest-300">
           <UIcon name="i-lucide-rocket" class="w-6 h-6 mr-1" /> R&M Explorer
         </span>
+        </ULink>
       </template>
 
       <template #right>
