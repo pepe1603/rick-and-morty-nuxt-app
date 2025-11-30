@@ -1,4 +1,7 @@
-<script setup>
+3.
+.
+2
+0<script setup>
 // 1. Importar el composable para la navegación
 const router = useRouter()
 const { getColorVariant } = useCustomColorVariants()

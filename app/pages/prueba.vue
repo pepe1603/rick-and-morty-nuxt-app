@@ -16,6 +16,7 @@ const colorMode = useColorMode()
       >
         {{ colorMode.value === 'dark' ? 'Modo Claro' : 'Modo Oscuro' }}
       </UButton>
+      
     </div>
 
     <!-- Sakura -->
