@@ -1,37 +1,29 @@
 <script setup lang="ts">
 import { useEpisodeStore } from '~/store/episodes';
 import { useLazyFetchEpisodes } from '~/composables/useRickAndMortyApi';
+import { useRoutePagination } from '~/composables/useRoutePagination';
 
 const store = useEpisodeStore();
-const route = useRoute();
-const router = useRouter();
-
 const { fetchEpisodes, isLoading, error } = useLazyFetchEpisodes();
+const { page } = useRoutePagination(); // Solo usamos 'page', ignoramos 'name', 'setSearch'
 
-// 1. Obtener la página inicial de la URL
-const initialPage = Number(route.query.page) || 1;
+// SSR initial fetch
+await fetchEpisodes(page.value);
 
-// 2. Carga SSR inicial (Solo necesitamos la página)
-await fetchEpisodes(initialPage);
+// Watch para cambios de página
+watch(page, (newPage) => {
+  fetchEpisodes(newPage);
+});
 
-// 3. Manejo del Cambio de Página
-const handlePageChange = async (page: number) => {
-  // 3.1. Actualizar la URL inmediatamente
-  router.push({ 
-    query: { page } 
-  });
-  
-  // 3.2. Esperar la carga
-  await fetchEpisodes(page); 
-  
-  // 3.3. Desplazamiento
+// Scroll al cambiar página
+const handlePageChange = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-// 4. SEO
+// SEO
 useHead({
   title: 'Episodios | Rick and Morty'
-})
+});
 </script>
 
 <template>
@@ -45,6 +37,7 @@ useHead({
       </p>
     </div>
 
+    <!-- Loading State -->
     <div
       v-if="isLoading && store.episodes.length === 0"
       class="text-center py-20"
@@ -56,6 +49,7 @@ useHead({
       <p class="mt-4 text-xl">Cargando temporadas y episodios...</p>
     </div>
 
+    <!-- Error State -->
     <div v-else-if="error" class="max-w-xl mx-auto py-20">
       <UAlert
         icon="i-lucide-alert-triangle"
@@ -69,7 +63,7 @@ useHead({
             color="error"
             variant="link"
             icon="i-lucide-rotate-cw"
-            @click="fetchEpisodes(store.currentPage)"
+            @click="fetchEpisodes(page)"
             class="mt-2"
           >
             Reintentar 
@@ -78,6 +72,7 @@ useHead({
       </UAlert>
     </div>
 
+    <!-- Episodes Grid -->
     <div v-else>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <ULink
@@ -103,24 +98,22 @@ useHead({
               </p>
             </div>
             <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800">
-                <UIcon name="i-lucide-users" class="w-4 h-4 mr-1 text-terra-500" />
-                <span class="text-xs text-gray-500">
-                    Apariciones de personajes: {{ episode.characters.length }}
-                </span>
+              <UIcon name="i-lucide-users" class="w-4 h-4 mr-1 text-terra-500" />
+              <span class="text-xs text-gray-500">
+                Apariciones de personajes: {{ episode.characters.length }}
+              </span>
             </div>
           </UCard>
         </ULink>
       </div>
 
+      <!-- Pagination -->
       <div class="flex justify-center mt-10">
         <UPagination
-          :model-value="store.currentPage"
-          :page-count="10"
+          v-model:page="page"
           :total="store.totalCount"
-          :ui="{ list: 'flex items-center gap-1', item: 'size-4' }" 
-          :active-button="{ color: 'sky', variant: 'solid' }"
-          :inactive-button="{ color: 'sky', variant: 'ghost' }"
-          @update:model-value="handlePageChange"
+          :items-per-page="20"
+          @update:page="handlePageChange"
         />
       </div>
     </div>

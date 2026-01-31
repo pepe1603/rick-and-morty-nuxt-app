@@ -1,22 +1,35 @@
 <script setup lang="ts">
 import { useLocationStore } from '~/store/location';
 import { useLazyFetchLocations } from '~/composables/useRickAndMortyApi';
-// El componente LocationCard será importado automáticamente por Nuxt 3
+import { useRoutePagination } from '~/composables/useRoutePagination';
 
 const store = useLocationStore();
-const route = useRoute();
-const router = useRouter();
-
 const { fetchLocations, isLoading, error } = useLazyFetchLocations();
+const { page, name, setSearch } = useRoutePagination();
 
-// Obtener la página inicial de la URL y cargar SSR
-const initialPage = Number(route.query.page) || 1;
-await fetchLocations(initialPage);
+// Estado local del input de búsqueda
+const searchQuery = ref(name.value);
 
-// Manejo del Cambio de Página
-const handlePageChange = async (page: number) => {
-  router.push({ query: { page } });
-  await fetchLocations(page); 
+// SSR initial fetch
+await fetchLocations(page.value, name.value);
+
+// Watch para cambios de página o búsqueda
+watch([page, name], ([newPage, newName]) => {
+  searchQuery.value = newName;
+  fetchLocations(newPage, newName);
+});
+
+// Búsqueda con debounce
+watchDebounced(
+  searchQuery,
+  (value) => {
+    setSearch(value);
+  },
+  { debounce: 800 }
+);
+
+// Scroll al cambiar página
+const handlePageChange = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
@@ -37,11 +50,28 @@ useHead({
       </p>
     </div>
 
+    <!-- Buscador -->
+    <div class="max-w-xl mx-auto">
+      <UInput
+        v-model="searchQuery"
+        icon="i-lucide-search"
+        placeholder="Buscar ubicación  (El retraso es de 0.7 segundos)"
+        class="w-full max-w-lg"
+        size="lg"
+        variant="outline"
+      />
+    </div>
+
+    <!-- Loading State -->
     <div v-if="isLoading && store.locations.length === 0" class="text-center py-20">
-      <UIcon name="i-lucide-globe" class="w-12 h-12 animate-spin text-terra-500 dark:text-terra-400 mx-auto" />
+      <UIcon 
+        name="i-lucide-loader-circle" 
+        class="w-12 h-12 animate-spin text-terra-500 dark:text-terra-400 mx-auto" 
+      />
       <p class="mt-4 text-xl">Mapeando el universo...</p>
     </div>
 
+    <!-- Error State -->
     <div v-else-if="error" class="max-w-xl mx-auto py-20">
       <UAlert
         icon="i-lucide-alert-triangle"
@@ -49,9 +79,33 @@ useHead({
         description="Ocurrió un error al cargar las ubicaciones. Intenta recargar la página."
         color="error"
         variant="subtle"
+      >
+        <template #footer>
+          <UButton
+            color="error"
+            variant="link"
+            icon="i-lucide-rotate-cw"
+            @click="fetchLocations(page, name)"
+            class="mt-2"
+          >
+            Reintentar 
+          </UButton>
+        </template>
+      </UAlert>
+    </div>
+
+    <!-- Empty State -->
+    <div v-else-if="store.locations.length === 0" class="py-20 max-w-xl mx-auto">
+      <UAlert
+        icon="i-lucide-compass-off"
+        title="Sin resultados"
+        description="No se encontraron ubicaciones con ese nombre."
+        color="warning"
+        variant="subtle"
       />
     </div>
 
+    <!-- Locations Grid -->
     <div v-else>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <LocationCard
@@ -61,14 +115,13 @@ useHead({
         />
       </div>
 
+      <!-- Pagination -->
       <div class="flex justify-center mt-10">
         <UPagination
-          :model-value="store.currentPage"
-          :page-count="10"
+          v-model:page="page"
           :total="store.totalCount"
-          :active-button="{ color: 'terra', variant: 'solid' }"
-          :inactive-button="{ color: 'terra', variant: 'ghost' }"
-          @update:model-value="handlePageChange"
+          :items-per-page="20"
+          @update:page="handlePageChange"
         />
       </div>
     </div>

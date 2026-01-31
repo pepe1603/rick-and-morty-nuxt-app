@@ -12,8 +12,18 @@ const { getColorVariant } = useCustomColorVariants()
     </h1>
 
     <p class="mt-4 text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-      Tu portal para explorar todos los personajes, episodios y ubicaciones del universo de Rick y Morty, construido con <span class="font-bold text-ocean-500">Nuxt 4</span>, <span class="font-bold text-ocean-500">Nuxt UI</span> y <span class="font-bold text-ocean-500">Tailwind CSS</span>.
+      Aplicación web desarrollada para explorar el universo de Rick and Morty a través de personajes,
+      episodios y ubicaciones.
+      Construida con una arquitectura moderna utilizando
+      <span class="font-semibold text-ocean-500">Nuxt 4</span>,
+      <span class="font-semibold text-ocean-500">Pinia</span>,
+      <span class="font-semibold text-ocean-500">Nuxt UI</span>
+      y
+      <span class="font-semibold text-ocean-500">Tailwind CSS</span>,
+      con foco en rendimiento, escalabilidad y una experiencia de usuario clara.
     </p>
+
+
 
     <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
       
@@ -24,8 +34,9 @@ const { getColorVariant } = useCustomColorVariants()
         variant="solid"
         icon="i-lucide-user-star"
       >
-        Ver Personajes
+        Explorar Personajes
       </UButton>
+
       
       <UButton
         to="/episodes"
@@ -34,8 +45,9 @@ const { getColorVariant } = useCustomColorVariants()
         variant="outline"
         icon="i-lucide-monitor-play"
       >
-        Ver Episodios
+        Explorar Episodios
       </UButton>
+
       
       <UButton
         to="/locations"
@@ -44,8 +56,9 @@ const { getColorVariant } = useCustomColorVariants()
         variant="outline"
         icon="i-lucide-globe"
       >
-        Ver Ubicaciones
+        Explorar Ubicaciones
       </UButton>
+
       
     </div>
 
@@ -57,26 +70,118 @@ const { getColorVariant } = useCustomColorVariants()
           <template #header>
             <UIcon name="i-lucide-palette" class="w-8 h-8 text-sakura-500" />
           </template>
-          <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">Temas Personalizados</p>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Usando tus paletas **Sakura, Forest y Ocean**.</p>
+
+          <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+            Sistema de Diseño Personalizado
+          </p>
+
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            Implementación de un sistema de temas reutilizable con paletas
+            <span class="font-medium">Sakura</span>, 
+            <span class="font-medium">Forest</span> y 
+            <span class="font-medium">Ocean</span>,
+            integrado con Tailwind y Nuxt UI.
+          </p>
         </UCard>
+
         
         <UCard class="bg-forest-50 dark:bg-gray-800">
           <template #header>
             <UIcon name="i-lucide-component" class="w-8 h-8 text-forest-500" />
           </template>
-          <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">Componentes UI</p>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Integración nativa con **@nuxt/ui**.</p>
+
+          <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+            Arquitectura de Componentes
+          </p>
+
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            Uso de componentes desacoplados y reutilizables con 
+            <span class="font-medium">@nuxt/ui</span>, 
+            enfocados en consistencia visual, accesibilidad y mantenibilidad.
+          </p>
         </UCard>
+
         
         <UCard class="bg-ocean-50 dark:bg-gray-800">
           <template #header>
             <UIcon name="i-lucide-server" class="w-8 h-8 text-ocean-500" />
           </template>
-          <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">Server-Side Fetching</p>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Uso de Pinia y `$fetch` para rendimiento.</p>
+
+          <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+            Server-Side Rendering & Estado Global
+          </p>
+
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            Integración de
+            <span class="font-medium">Server-Side Rendering (SSR)</span>,
+            <span class="font-medium">Pinia</span> y
+            <span class="font-medium">$fetch</span>
+            para la gestión de datos, estado global y carga eficiente de información.
+          </p>
+
         </UCard>
+
       </div>
     </div>
+
+    <div class="mt-24 pt-10 border-t border-gray-200 dark:border-gray-800">
+      <h2 class="text-3xl font-bold text-ocean-600 dark:text-ocean-400 mb-10 text-center">
+        Arquitectura & Decisiones Técnicas
+      </h2>
+
+      <div class="max-w-4xl mx-auto space-y-6 text-left text-gray-600 dark:text-gray-400">
+
+        <p class="text-lg">
+          Este proyecto fue diseñado siguiendo principios de arquitectura frontend moderna,
+          priorizando escalabilidad, mantenibilidad y una experiencia de usuario fluida.
+        </p>
+
+        <div class="space-y-5">
+          
+          <div class="p-5 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <p class="font-semibold text-gray-800 dark:text-gray-200 mb-1">
+              La URL como fuente de verdad
+            </p>
+            <p class="text-sm">
+              La paginación y los filtros se sincronizan con la URL, permitiendo navegación
+              con back/forward del navegador y enlaces compartibles.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <p class="font-semibold text-gray-800 dark:text-gray-200 mb-1">
+              Separación de responsabilidades
+            </p>
+            <p class="text-sm">
+              La lógica de datos, estado global y navegación se organiza en composables
+              y stores desacoplados y reutilizables.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <p class="font-semibold text-gray-800 dark:text-gray-200 mb-1">
+              Server-Side Rendering (SSR)
+            </p>
+            <p class="text-sm">
+              Los datos iniciales se cargan en el servidor para mejorar el rendimiento,
+              el SEO y la experiencia de carga inicial.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <p class="font-semibold text-gray-800 dark:text-gray-200 mb-1">
+              Escalabilidad
+            </p>
+            <p class="text-sm">
+              El mismo patrón de arquitectura se reutiliza para personajes
+              y ubicaciones, reduciendo duplicación de código.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </template>

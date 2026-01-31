@@ -1,75 +1,26 @@
-# Nuxt Minimal Starter
+# Rick & Morty Explorer
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Aplicación web construida con **Nuxt 4** para explorar personajes, episodios y
+ubicaciones del universo de Rick and Morty.
 
-## Setup
+Este proyecto forma parte de mi portafolio personal y está enfocado en una
+experiencia de usuario clara, navegación fluida y una estructura de código limpia.
 
-Make sure to install dependencies:
+---
+
+## 🛠️ Tecnologías
+
+- Nuxt 4
+- Vue 3 (Composition API)
+- Pinia
+- Nuxt UI
+- Tailwind CSS
+- Rick and Morty API
+
+---
+
+## 🚀 Instalación y uso
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
